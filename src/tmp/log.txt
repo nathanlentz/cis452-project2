@@ -1,0 +1,8 @@
+
+
+
+New Session Tue Feb  7 21:51:36 2017
+
+========================================
+
+-- Logger Initialized
