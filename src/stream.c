@@ -18,6 +18,7 @@
 /* Global Variables */
 struct stat st = {0};
 FILE *logger;
+int isPaused = 0;
 
 
 
@@ -25,6 +26,8 @@ FILE *logger;
 int initializeLogger();
 int findBinaryLength(FILE*);
 int findVectorLength(FILE*);
+void unpauseHandler(int signal);
+void acknowledgeParentHandler(int signal);
 
 
 
@@ -55,62 +58,82 @@ int main(int argc, char *argv[])
 	printf("Spinning things up. . .\n");
 	fprintf(logger, "-- Reading file dimensions\n");
 
-	FILE* vectorA;
+	FILE* vectorB;
 
 	//TODO: only allow parent to see file
-	if((vectorA = fopen(argv[1], "r")) == NULL){
+	if((vectorB = fopen(argv[2], "r")) == NULL){
 		perror(argv[1]);
 		exit(1);
 	}
 
-	int binaryLen = findBinaryLength(vectorA);
-	int vectorLen = findVectorLength(vectorA); 
+	signal(SIGINT, unpauseHandler);
+	fprintf(logger, "Binding ^C (SIGINT) signal to handler for all processes");
+	//int binaryLen = findBinaryLength(vectorB);
+	//int vectorLen = findVectorLength(vectorB); 
 	
 
 	/*******************************************************
-	* Parent - The Complimenter
-	*
+	* Parent - The Complimenter. Read from Vector B
+	* and do compliment for each bit
 	********************************************************/
 	int fd[2];
+	int secondPid;
+	int status;
+
     if (pipe (fd) < 0) { 
         perror ("Unable to create pipe 1"); 
         exit(1); 
-    } 
-	
+    }
 
-	/* Child 1 - C1 */
+    // Create First Child Process
+    if ((secondPid = fork()) < 0) { 
+        perror ("fork failed"); 
+        exit(1); 
+    }  
+
+    /* Second Process - C1 */
+    if (secondPid == 0){
+    	// Close write from pipe
+    	close(fd[1]);
+    	
+    	printf("Second Process Waiting\n");
+    	fflush(stdout);
+    	while(1){
+    		if(isPaused == 1){
+    			break;
+    		}
+    	}
+
+
+
+
+    }
+	
+	/*******************************************************
+	* Parent - The Complimenter. Read from Vector B
+	* and do compliment for each bit
+	********************************************************/
+	else {
+		// Close read from pipe
+		close(fd[0]);
+		
+		printf("Parent Process Waiting\n");
+		fflush(stdout);
+	    while(1){
+			if(isPaused == 1){
+				break;
+			}
+		}
+    	
+
+	}
+
 
 
 	/* Child 2 - C2 */
 
-	fclose(vectorA);
+	fclose(vectorB);
 	fclose(logger);
-	return 0;
-}
-
-
-/********************************************************** 
-* Sets up logger for current session
-**********************************************************/
-int initializeLogger()
-{
-	struct tm *localTime;
-	time_t currentTime;
-
-	// Get current time of system
-	currentTime = time(NULL);
-
-	// Get current time to local time
-	localTime = localtime(&currentTime);
-
-	if(stat("tmp", &st) == -1){
-		mkdir("tmp", 0700);
-	}
-
-	logger = fopen("tmp/log.txt", "a");
-	fprintf(logger, "\n\n\nRun: %s\n", asctime(localTime));
-	fprintf(logger,"========================================\n\n");
-	
 	return 0;
 }
 
@@ -144,3 +167,85 @@ int findVectorLength(FILE* vector)
 	// Plus 1 because there is no new line at EOF
 	return length+1;
 }
+
+
+/***********************************************************
+* Signal Handler designed to begin execution of 
+* vector processing from paused state. Triggered from ^C
+*
+*
+************************************************************/
+void unpauseHandler(int signal)
+{
+		if(signal == SIGINT) {
+			isPaused = 1;
+		}
+}
+
+
+
+
+/*************************************************************
+* Signal Hanlder for letting parent of a process know that
+* they have received all bits for a binary number on one line
+**************************************************************/
+
+void acknowledgeParentHandler(int signal)
+{
+	// Send this signal to parent to let them know they are done
+
+}
+
+
+
+/********************************************************** 
+* Sets up logger for current session
+**********************************************************/
+int initializeLogger()
+{
+	struct tm *localTime;
+	time_t currentTime;
+
+	// Get current time of system
+	currentTime = time(NULL);
+
+	// Get current time to local time
+	localTime = localtime(&currentTime);
+
+	if(stat("tmp", &st) == -1){
+		mkdir("tmp", 0700);
+	}
+
+	logger = fopen("tmp/log.txt", "a");
+	fprintf(logger, "\n\n\nRun: %s\n", asctime(localTime));
+	fprintf(logger,"========================================\n\n");
+	
+	return 0;
+}
+
+// Code to be put into C1 for piping and creating next child
+	// int fd2[2];
+	// if(pipe(fd2) < 0){
+	// 	perror("Unable to create pipe 2");
+	// 	fprintf(logger, "Failed to create pipe 2\n");
+	// 	exit(1);
+	// }
+
+	// if((third-pid = fork()) < 0){
+	// 	perror("fork failed");
+	// 	fprintf(logger, "Failed to create second fork");
+	// 	exit(1);
+	// }
+
+	// close(fd[0]);
+
+	// /***************************************************
+	// * Third Process (C2). Read VectorA and perform 
+	// * addition on A + (-B). B is read from pipe
+	// ***************************************************/
+
+	// if(third-pid == 0){
+	// 	close(fd[0]);
+	// 	close(fd2[1]);
+
+	// }

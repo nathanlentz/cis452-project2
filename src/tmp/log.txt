@@ -6,3 +6,103 @@ New Session Tue Feb  7 21:51:36 2017
 ========================================
 
 -- Logger Initialized
+
+
+
+Run: Tue Feb  7 22:39:09 2017
+
+========================================
+
+-- Logger Initialized
+-- Reading file dimensions
+
+
+
+Run: Tue Feb  7 23:45:34 2017
+
+========================================
+
+-- Logger Initialized
+-- Reading file dimensions
+Binding ^C (SIGINT) signal to handler for all processes
+
+
+Run: Tue Feb  7 23:45:34 2017
+
+========================================
+
+-- Logger Initialized
+-- Reading file dimensions
+Binding ^C (SIGINT) signal to handler for all processes
+
+
+Run: Tue Feb  7 23:45:46 2017
+
+========================================
+
+-- Logger Initialized
+-- Reading file dimensions
+Binding ^C (SIGINT) signal to handler for all processes
+
+
+Run: Tue Feb  7 23:45:46 2017
+
+========================================
+
+-- Logger Initialized
+-- Reading file dimensions
+Binding ^C (SIGINT) signal to handler for all processes
+
+
+Run: Tue Feb  7 23:47:15 2017
+
+========================================
+
+-- Logger Initialized
+-- Reading file dimensions
+Binding ^C (SIGINT) signal to handler for all processes
+
+
+Run: Tue Feb  7 23:47:15 2017
+
+========================================
+
+-- Logger Initialized
+-- Reading file dimensions
+Binding ^C (SIGINT) signal to handler for all processes
+
+
+Run: Tue Feb  7 23:47:45 2017
+
+========================================
+
+-- Logger Initialized
+-- Reading file dimensions
+Binding ^C (SIGINT) signal to handler for all processes
+
+
+Run: Tue Feb  7 23:47:45 2017
+
+========================================
+
+-- Logger Initialized
+-- Reading file dimensions
+Binding ^C (SIGINT) signal to handler for all processes
+
+
+Run: Tue Feb  7 23:48:03 2017
+
+========================================
+
+-- Logger Initialized
+-- Reading file dimensions
+Binding ^C (SIGINT) signal to handler for all processes
+
+
+Run: Tue Feb  7 23:48:03 2017
+
+========================================
+
+-- Logger Initialized
+-- Reading file dimensions
+Binding ^C (SIGINT) signal to handler for all processes
