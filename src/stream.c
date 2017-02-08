@@ -30,7 +30,7 @@ int findVectorLength(FILE*);
 
 /********************************************************** 
 * Entry point for program
-* - 
+* - could I write size to the pipe?
 *
 **********************************************************/
 
@@ -45,16 +45,15 @@ int main(int argc, char *argv[])
 		fprintf(logger, "-- Logger Initialized\n");
 	}
 
-
-
 	// Check if arguments are complete
 	if(argc != 3){
 		fprintf(stderr, "There are not enough arguments\n\n");
-		fprintf(logger, "Not enough arguments");
+		fprintf(logger, "-- Not enough arguments. Exiting\n");
 		exit(1);
 	}
 
 	printf("Spinning things up. . .\n");
+	fprintf(logger, "-- Reading file dimensions\n");
 
 	FILE* vectorA;
 
@@ -68,7 +67,10 @@ int main(int argc, char *argv[])
 	int vectorLen = findVectorLength(vectorA); 
 	
 
-	/* Parent */
+	/*******************************************************
+	* Parent - The Complimenter
+	*
+	********************************************************/
 	int fd[2];
     if (pipe (fd) < 0) { 
         perror ("Unable to create pipe 1"); 
@@ -82,6 +84,7 @@ int main(int argc, char *argv[])
 	/* Child 2 - C2 */
 
 	fclose(vectorA);
+	fclose(logger);
 	return 0;
 }
 
