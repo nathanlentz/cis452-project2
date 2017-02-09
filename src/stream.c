@@ -7,6 +7,10 @@
 #include <sys/stat.h>
 #include <time.h>
 
+#define READ 0 
+#define WRITE 1 
+#define MAX 1
+
 /*********************************************************** 
 * CIS 452 - Project 2: Streamed Vector Processing
 * @author: Nathan Lentz
@@ -26,6 +30,7 @@ int isPaused = 0;
 int initializeLogger();
 int findBinaryLength(FILE*);
 int findVectorLength(FILE*);
+void pauseProcesses();
 void unpauseHandler(int signal);
 void acknowledgeParentHandler(int signal);
 
@@ -56,29 +61,16 @@ int main(int argc, char *argv[])
 	}
 
 	printf("Spinning things up. . .\n");
-	fprintf(logger, "-- Reading file dimensions\n");
-
-	FILE* vectorB;
-
-	//TODO: only allow parent to see file
-	if((vectorB = fopen(argv[2], "r")) == NULL){
-		perror(argv[1]);
-		exit(1);
-	}
 
 	signal(SIGINT, unpauseHandler);
-	fprintf(logger, "Binding ^C (SIGINT) signal to handler for all processes");
-	//int binaryLen = findBinaryLength(vectorB);
-	//int vectorLen = findVectorLength(vectorB); 
+	fprintf(logger, "-- Binding ^C (SIGINT) signal to handler for all processes\n");
 	
 
-	/*******************************************************
-	* Parent - The Complimenter. Read from Vector B
-	* and do compliment for each bit
-	********************************************************/
+
 	int fd[2];
+	int fd2[2];
 	int secondPid;
-	int status;
+	//int status;
 
     if (pipe (fd) < 0) { 
         perror ("Unable to create pipe 1"); 
@@ -94,15 +86,53 @@ int main(int argc, char *argv[])
     /* Second Process - C1 */
     if (secondPid == 0){
     	// Close write from pipe
-    	close(fd[1]);
+    	//int logId = 1;
+
+    	close(fd[WRITE]);
+    	//fclose(stdout);
+    	fclose(stdin);
     	
-    	printf("Second Process Waiting\n");
-    	fflush(stdout);
-    	while(1){
-    		if(isPaused == 1){
-    			break;
-    		}
-    	}
+
+		int thirdPid;
+		int status2;
+		if(pipe(fd2) < 0){
+			perror("Unable to create pipe 2");
+			fprintf(logger, "Failed to create pipe 2\n");
+			exit(1);
+		}
+
+		if((thirdPid = fork()) < 0){
+			perror("fork failed");
+			fprintf(logger, "Failed to create second fork");
+			exit(1);
+		}
+
+		
+
+		/***************************************************
+		* Third Process (C2). Read VectorA and perform 
+		* addition on A + (-B). B is read from pipe
+		***************************************************/
+
+		if(thirdPid == 0){
+			close(fd[READ]);
+			close(fd2[WRITE]);
+			pauseProcesses();
+
+		}
+
+		else {
+	    	int bit = 0;
+    
+	    	while(bit != 2){
+		    	read(fd[READ], &bit, sizeof(int));
+		    	printf("Child received %i\n", bit);
+	    	}
+
+		}
+
+    	// try to read from pipe
+    
 
 
 
@@ -114,17 +144,51 @@ int main(int argc, char *argv[])
 	* and do compliment for each bit
 	********************************************************/
 	else {
+		//int logId = 0;
 		// Close read from pipe
-		close(fd[0]);
-		
-		printf("Parent Process Waiting\n");
-		fflush(stdout);
-	    while(1){
-			if(isPaused == 1){
-				break;
-			}
+		close(fd[READ]);
+		fclose(stdout);
+		fclose(stdin);
+
+		pauseProcesses();
+
+		fprintf(logger, "-- Reading file dimensions\n");
+
+		FILE* vectorB;
+
+		// Open file B
+		if((vectorB = fopen(argv[2], "r")) == NULL){
+			perror(argv[2]);
+			exit(1);
 		}
-    	
+		// Turn char into int
+		
+
+		// Find file dimensions and send through pipe
+		// char dimensions[1];
+		// dimensions[0] = findBinaryLength(vectorB);
+		// dimensions[1] = findVectorLength(vectorB); 
+		
+		int bit = 0;
+		int c;
+
+		while((c = fgetc(vectorB)) != '\n'){
+			bit = c - '0';
+			if(bit == 0){
+				bit = 1;
+			} else {
+				bit = 0;
+			}
+			write(fd[WRITE], &bit, sizeof(int));
+		}
+		// 2 Might mean end of binary number
+		// 3 might mean EOF
+		if(c == '\n'){
+			bit = 2;
+			write(fd[WRITE], &bit, sizeof(int));
+		}
+
+    	fclose(vectorB);
 
 	}
 
@@ -132,7 +196,7 @@ int main(int argc, char *argv[])
 
 	/* Child 2 - C2 */
 
-	fclose(vectorB);
+	
 	fclose(logger);
 	return 0;
 }
@@ -168,6 +232,21 @@ int findVectorLength(FILE* vector)
 	return length+1;
 }
 
+void pauseProcesses(){
+	
+	printf("\nAll processes ready to go: Ctrl + C to begin\n");
+	fprintf(logger, "** Processes and pipes created. Waiting for signal to begin\n");
+	fflush(stdout);
+    while(1){
+		if(isPaused == 1){
+			fprintf(stdout, " recieved! Beginning\n");
+			fprintf(logger, "--^C Received from user, beginning streaming\n");
+			break;
+		}
+	}
+
+}
+
 
 /***********************************************************
 * Signal Handler designed to begin execution of 
@@ -181,8 +260,6 @@ void unpauseHandler(int signal)
 			isPaused = 1;
 		}
 }
-
-
 
 
 /*************************************************************
@@ -223,29 +300,3 @@ int initializeLogger()
 	return 0;
 }
 
-// Code to be put into C1 for piping and creating next child
-	// int fd2[2];
-	// if(pipe(fd2) < 0){
-	// 	perror("Unable to create pipe 2");
-	// 	fprintf(logger, "Failed to create pipe 2\n");
-	// 	exit(1);
-	// }
-
-	// if((third-pid = fork()) < 0){
-	// 	perror("fork failed");
-	// 	fprintf(logger, "Failed to create second fork");
-	// 	exit(1);
-	// }
-
-	// close(fd[0]);
-
-	// /***************************************************
-	// * Third Process (C2). Read VectorA and perform 
-	// * addition on A + (-B). B is read from pipe
-	// ***************************************************/
-
-	// if(third-pid == 0){
-	// 	close(fd[0]);
-	// 	close(fd2[1]);
-
-	// }
