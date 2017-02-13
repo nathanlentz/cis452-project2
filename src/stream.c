@@ -119,19 +119,44 @@ int main(int argc, char *argv[])
 			close(fd2[WRITE]);
 			pauseProcesses();
 
+			FILE* output;
+
+		    output = fopen("tmp/output.txt", "w+");
+
+			int bit = 0;
+			while(bit != 2){
+		    	read(fd2[READ], &bit, sizeof(int));
+		    	printf("Final child received %i\n", bit);
+		    	fprintf(output, "%i", bit);
+			}
+
+			fclose(output);
+
 		}
 
 		else {
 	    	int bit = 0;
+	    	int carry = 0;
+	    	int firstBit = 0;
     
+
+    		// try to read from pipe
 	    	while(bit != 2){
 		    	read(fd[READ], &bit, sizeof(int));
 		    	printf("Child received %i\n", bit);
+		    	// TODO Perform Incriment
+
+		    	// Write to C2
+		    	write(fd2[WRITE], &bit, sizeof(int));
+
+		    	
+
 	    	}
+
+	    	printf("Recieved end of line\n");
 
 		}
 
-    	// try to read from pipe
     
 
 

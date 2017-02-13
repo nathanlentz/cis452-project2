@@ -437,3 +437,227 @@ Run: Wed Feb  8 21:53:22 2017
 
 -- Logger Initialized
 -- Binding ^C (SIGINT) signal to handler for all processes
+
+
+
+Run: Sun Feb 12 18:54:41 2017
+
+========================================
+
+-- Logger Initialized
+-- Not enough arguments. Exiting
+
+
+
+Run: Sun Feb 12 18:54:47 2017
+
+========================================
+
+-- Logger Initialized
+-- Binding ^C (SIGINT) signal to handler for all processes
+** Processes and pipes created. Waiting for signal to begin
+--^C Received from user, beginning streaming
+
+
+
+Run: Sun Feb 12 18:54:47 2017
+
+========================================
+
+-- Logger Initialized
+-- Binding ^C (SIGINT) signal to handler for all processes
+** Processes and pipes created. Waiting for signal to begin
+--^C Received from user, beginning streaming
+-- Reading file dimensions
+
+
+
+Run: Sun Feb 12 18:59:01 2017
+
+========================================
+
+-- Logger Initialized
+-- Binding ^C (SIGINT) signal to handler for all processes
+** Processes and pipes created. Waiting for signal to begin
+--^C Received from user, beginning streaming
+
+
+
+Run: Sun Feb 12 18:59:01 2017
+
+========================================
+
+-- Logger Initialized
+-- Binding ^C (SIGINT) signal to handler for all processes
+** Processes and pipes created. Waiting for signal to begin
+--^C Received from user, beginning streaming
+-- Reading file dimensions
+
+
+
+Run: Sun Feb 12 18:59:01 2017
+
+========================================
+
+-- Logger Initialized
+-- Binding ^C (SIGINT) signal to handler for all processes
+
+
+
+Run: Sun Feb 12 19:25:23 2017
+
+========================================
+
+-- Logger Initialized
+-- Binding ^C (SIGINT) signal to handler for all processes
+** Processes and pipes created. Waiting for signal to begin
+--^C Received from user, beginning streaming
+-- Reading file dimensions
+
+
+
+Run: Sun Feb 12 19:25:23 2017
+
+========================================
+
+-- Logger Initialized
+-- Binding ^C (SIGINT) signal to handler for all processes
+
+
+
+Run: Sun Feb 12 19:25:23 2017
+
+========================================
+
+-- Logger Initialized
+-- Binding ^C (SIGINT) signal to handler for all processes
+** Processes and pipes created. Waiting for signal to begin
+--^C Received from user, beginning streaming
+
+
+
+Run: Sun Feb 12 19:25:50 2017
+
+========================================
+
+-- Logger Initialized
+-- Binding ^C (SIGINT) signal to handler for all processes
+** Processes and pipes created. Waiting for signal to begin
+--^C Received from user, beginning streaming
+-- Reading file dimensions
+
+
+
+Run: Sun Feb 12 19:25:50 2017
+
+========================================
+
+-- Logger Initialized
+-- Binding ^C (SIGINT) signal to handler for all processes
+
+
+
+Run: Sun Feb 12 19:25:50 2017
+
+========================================
+
+-- Logger Initialized
+-- Binding ^C (SIGINT) signal to handler for all processes
+** Processes and pipes created. Waiting for signal to begin
+--^C Received from user, beginning streaming
+
+
+
+Run: Sun Feb 12 19:31:54 2017
+
+========================================
+
+-- Logger Initialized
+-- Binding ^C (SIGINT) signal to handler for all processes
+** Processes and pipes created. Waiting for signal to begin
+--^C Received from user, beginning streaming
+-- Reading file dimensions
+
+
+
+Run: Sun Feb 12 19:31:54 2017
+
+========================================
+
+-- Logger Initialized
+-- Binding ^C (SIGINT) signal to handler for all processes
+
+
+
+Run: Sun Feb 12 19:31:54 2017
+
+========================================
+
+-- Logger Initialized
+-- Binding ^C (SIGINT) signal to handler for all processes
+** Processes and pipes created. Waiting for signal to begin
+--^C Received from user, beginning streaming
+
+
+
+Run: Sun Feb 12 19:34:23 2017
+
+========================================
+
+-- Logger Initialized
+-- Binding ^C (SIGINT) signal to handler for all processes
+** Processes and pipes created. Waiting for signal to begin
+--^C Received from user, beginning streaming
+-- Reading file dimensions
+
+
+
+Run: Sun Feb 12 19:34:23 2017
+
+========================================
+
+-- Logger Initialized
+-- Binding ^C (SIGINT) signal to handler for all processes
+
+
+
+Run: Sun Feb 12 19:34:23 2017
+
+========================================
+
+-- Logger Initialized
+-- Binding ^C (SIGINT) signal to handler for all processes
+** Processes and pipes created. Waiting for signal to begin
+--^C Received from user, beginning streaming
+
+
+
+Run: Sun Feb 12 19:35:51 2017
+
+========================================
+
+-- Logger Initialized
+-- Binding ^C (SIGINT) signal to handler for all processes
+** Processes and pipes created. Waiting for signal to begin
+--^C Received from user, beginning streaming
+-- Reading file dimensions
+
+
+
+Run: Sun Feb 12 19:35:51 2017
+
+========================================
+
+-- Logger Initialized
+-- Binding ^C (SIGINT) signal to handler for all processes
+
+
+
+Run: Sun Feb 12 19:35:51 2017
+
+========================================
+
+-- Logger Initialized
+-- Binding ^C (SIGINT) signal to handler for all processes
+** Processes and pipes created. Waiting for signal to begin
+--^C Received from user, beginning streaming
