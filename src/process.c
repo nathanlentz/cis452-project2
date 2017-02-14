@@ -34,6 +34,7 @@ void recievedEOFHandler(int signal);
 void unpauseHandler(int signal);
 void readLineHandler(int signal);
 void readNextLineHandler(int signal);
+char* increment(char* buffer);
 
 /* Main Entry Point for Program */
 int main(int argc, char *argv[])
@@ -70,13 +71,11 @@ int main(int argc, char *argv[])
         exit(1); 
     }  
 
-    pauseProcesses();
-
     /* Complimentor Process */ 
     if(incrementerId > 0) { // Parent
         // Close unnecessary file descriptors
         close(compToIncPipe[READ]);
-
+        pauseProcesses();
         // Map Signal Handler 
         signal(SIGUSR1, readLineHandler);
         signal(SIGUSR2, readNextLineHandler);
@@ -90,15 +89,15 @@ int main(int argc, char *argv[])
         char buffer[numberLen+2]; // New line and null terminating
         int i;
         while (fgets(buffer, sizeof(buffer), vectorB) != NULL)  {
-            // Report what read was
-            while(1){
+            while(1){ // Wait until inc and add are done
                 if(incrementerHasRead && adderHasRead){
                     break;
                 }
             }
-            //while(!canComplimenterContinue){ ; } // No op until incrementer has read
-            buffer[numberLen-1]='\0'; // Remove \n from input for now
+            
+            buffer[numberLen]='\0'; // Remove \n from input for now
 
+            // Report what read was
             printf("Complimentor read: %s\t", buffer);
             // Loop through string and perform 'compliment'
             for(i = 0; i < numberLen; i++){
@@ -148,11 +147,45 @@ int main(int argc, char *argv[])
             signal(SIGUSR2, readLineHandler);
 
             int counter = 1;
+            int i;
+            bool isFirst;
+            bool carry;
+
             while(counter <= numberOfValues){
                 while(!adderHasRead) { ; } // Wait for adder to read
                 read(compToIncPipe[READ], &buffer, sizeof(buffer));
                 printf("Incrementer read: %s\t", buffer);
+
                 // Perform Incrementation on buffer
+                isFirst = true;
+                carry = false;
+                for(i = numberLen-1; i >=0; i--){
+                    if(isFirst){
+                        if(buffer[i] == '0'){
+                            buffer[i] = '1';
+                            break;
+                        }
+                        if(buffer[i] == '1'){
+                            buffer[i] = '0';
+                            carry = true;
+                            continue;
+                        }
+                    }
+                    else {
+                        if(buffer[i] == '0' && carry){
+                            buffer[i] = '1';
+                            carry = false;
+                        }
+                        else if(buffer[i] == '1' && carry){
+                            buffer[i] = '0';
+                            carry = true;
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                }
+                    
                 printf("Incrementer writing to Adder: %s\n", buffer);
                 write(incToAddPipe[WRITE], &buffer, sizeof(buffer));
                 counter++;
@@ -199,6 +232,7 @@ void unpauseHandler(int signal)
 	if(signal == SIGINT) {
 		isPaused = 1;
 	}
+    // Allows for an exit via interrupt if needed 
     TTK--;
     if(TTK == 0){
         exit(1);
@@ -208,7 +242,8 @@ void unpauseHandler(int signal)
 /****************************************************************
 * Pause processes to give time to evaluate process tree
 *****************************************************************/
-void pauseProcesses(){
+void pauseProcesses()
+{
 	if(incrementerId > 0){
 	    printf("\nAll processes ready to go: Ctrl + C to begin\n");
     }
@@ -240,7 +275,11 @@ void readLineHandler(int signal)
     }
 }
 
-void readNextLineHandler(int signal){
+/****************************************************************
+* Allows Complementor to continue doing work
+*****************************************************************/
+void readNextLineHandler(int signal)
+{
     if(signal == SIGUSR2){
         if(incrementerId > 0){
             adderHasRead = true;
