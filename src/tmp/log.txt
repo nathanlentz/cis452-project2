@@ -1,100 +1,88 @@
 
 
 
-Run: Wed Feb  8 20:11:37 2017
-
-========================================
-
--- Logger Initialized
--- Reading file dimensions
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Wed Feb  8 20:11:37 2017
-
-========================================
-
--- Logger Initialized
--- Reading file dimensions
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Wed Feb  8 20:58:55 2017
+Run: Mon Feb 13 12:43:24 2017
 
 ========================================
 
 -- Logger Initialized
 -- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
+-- C1: Writing 0 to output
+-- C1: Writing 1 to output
+-- C1: Writing 0 to output
+-- C1: Writing 1 to output
+-- C1: Writing 1 to output
+-- C1: Writing 0 to output
+-- C1: Writing 1 to output
+-- C1: Writing 1 to output
+-- C1: Recieved end of line. Sending signal to parent
+-- C1: Writing 0 to output
+-- C1: Writing 1 to output
+-- C1: Writing 0 to output
+-- C1: Writing 1 to output
+-- C1: Writing 0 to output
+-- C1: Writing 0 to output
+-- C1: Writing 1 to output
+-- C1: Writing 1 to output
+-- C1: Recieved end of line. Sending signal to parent
+-- C1: Writing 0 to output
+-- C1: Writing 0 to output
+-- C1: Writing 0 to output
+-- C1: Writing 1 to output
+-- C1: Writing 0 to output
+-- C1: Writing 0 to output
+-- C1: Writing 1 to output
+-- C1: Writing 0 to output
+-- C1: Recieved end of line. Sending signal to parent
+-- C1: Writing 0 to output
+-- C1: Writing 0 to output
+-- C1: Writing 0 to output
+-- C1: Writing 0 to output
+-- C1: Writing 1 to output
+-- C1: Writing 0 to output
+-- C1: Writing 0 to output
+-- C1: Writing 1 to output
+-- C1: Recieved end of line. Sending signal to parent
+-- C1: Writing 0 to output
+-- C1: Writing 1 to output
+-- C1: Writing 1 to output
+-- C1: Writing 1 to output
+-- C1: Writing 0 to output
+-- C1: Writing 0 to output
+-- C1: Writing 1 to output
+-- C1: Writing 0 to output
+-- C1: Recieved end of line. Sending signal to parent
+-- C1: Writing 0 to output
+-- C1: Writing 1 to output
+-- C1: Writing 0 to output
+-- C1: Writing 1 to output
+-- C1: Writing 1 to output
+-- C1: Writing 1 to output
+-- C1: Writing 1 to output
+-- C1: Writing 1 to output
+-- C1: Recieved end of line. Sending signal to parent
+-- C1: Writing 0 to output
+-- C1: Writing 0 to output
+-- C1: Writing 1 to output
+-- C1: Writing 0 to output
+-- C1: Writing 0 to output
+-- C1: Writing 1 to output
+-- C1: Writing 1 to output
+-- C1: Writing 1 to output
+-- C1: Recieved end of line. Sending signal to parent
+-- C1: Writing 0 to output
+-- C1: Writing 0 to output
+-- C1: Writing 0 to output
+-- C1: Writing 1 to output
+-- C1: Writing 0 to output
+-- C1: Writing 1 to output
+-- C1: Writing 0 to output
+-- C1: Writing 1 to output
+-- C1: Recieved end of file. Sending signal to parent
 
 
 
-Run: Wed Feb  8 20:58:55 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Wed Feb  8 20:59:37 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Wed Feb  8 20:59:37 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Wed Feb  8 21:00:18 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Wed Feb  8 21:00:18 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Wed Feb  8 21:01:07 2017
+Run: Mon Feb 13 12:43:24 2017
 
 ========================================
 
@@ -102,562 +90,82 @@ Run: Wed Feb  8 21:01:07 2017
 -- Binding ^C (SIGINT) signal to handler for all processes
 ** Processes and pipes created. Waiting for signal to begin
 --^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Wed Feb  8 21:01:07 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Wed Feb  8 21:01:25 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Wed Feb  8 21:01:25 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Wed Feb  8 21:10:57 2017
-
-========================================
-
--- Logger Initialized
--- Not enough arguments. Exiting
-
-
-
-Run: Wed Feb  8 21:11:03 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Wed Feb  8 21:11:03 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Wed Feb  8 21:11:41 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Wed Feb  8 21:11:41 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Wed Feb  8 21:14:39 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Wed Feb  8 21:14:39 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Wed Feb  8 21:15:44 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Wed Feb  8 21:15:44 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Wed Feb  8 21:15:52 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Wed Feb  8 21:15:52 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Wed Feb  8 21:30:06 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Wed Feb  8 21:31:28 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Wed Feb  8 21:31:28 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Wed Feb  8 21:34:08 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Wed Feb  8 21:34:08 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Wed Feb  8 21:34:46 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Wed Feb  8 21:34:46 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Wed Feb  8 21:51:12 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Wed Feb  8 21:51:12 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Wed Feb  8 21:51:12 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-
-
-
-Run: Wed Feb  8 21:51:23 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Wed Feb  8 21:51:23 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Wed Feb  8 21:51:23 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-
-
-
-Run: Wed Feb  8 21:53:22 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Wed Feb  8 21:53:22 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Wed Feb  8 21:53:22 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-
-
-
-Run: Sun Feb 12 18:54:41 2017
-
-========================================
-
--- Logger Initialized
--- Not enough arguments. Exiting
-
-
-
-Run: Sun Feb 12 18:54:47 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Sun Feb 12 18:54:47 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Sun Feb 12 18:59:01 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Sun Feb 12 18:59:01 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Sun Feb 12 18:59:01 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-
-
-
-Run: Sun Feb 12 19:25:23 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Sun Feb 12 19:25:23 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-
-
-
-Run: Sun Feb 12 19:25:23 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Sun Feb 12 19:25:50 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Sun Feb 12 19:25:50 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-
-
-
-Run: Sun Feb 12 19:25:50 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Sun Feb 12 19:31:54 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Sun Feb 12 19:31:54 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-
-
-
-Run: Sun Feb 12 19:31:54 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Sun Feb 12 19:34:23 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Sun Feb 12 19:34:23 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-
-
-
-Run: Sun Feb 12 19:34:23 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
-
-
-
-Run: Sun Feb 12 19:35:51 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
--- Reading file dimensions
-
-
-
-Run: Sun Feb 12 19:35:51 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-
-
-
-Run: Sun Feb 12 19:35:51 2017
-
-========================================
-
--- Logger Initialized
--- Binding ^C (SIGINT) signal to handler for all processes
-** Processes and pipes created. Waiting for signal to begin
---^C Received from user, beginning streaming
+-- Opening VectorB for ereading
+-- P: Sending bit 1 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 2 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 2 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 2 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 2 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 2 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 2 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 2 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 1 to child
+-- P: Sending bit 0 to child
+-- P: Sending bit 1 to child
+-- P: Reached EOF, sending 3 to child
+Child recieved end of a line
+Child recieved end of a line
+Child recieved end of a line
+Child recieved end of a line
+Child recieved end of a line
+Child finished recieving

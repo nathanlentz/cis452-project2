@@ -23,9 +23,12 @@
 struct stat st = {0};
 FILE *logger;
 int isPaused = 0;
+int pid;
+int nextLine = 0;
 
 
-
+//int numberLength;
+//int vectorLength;
 
 /* Prototypes */
 int initializeLogger();
@@ -33,13 +36,12 @@ int findBinaryLength(FILE*);
 int findVectorLength(FILE*);
 void pauseProcesses();
 void unpauseHandler(int signal);
+void killAll(int signal);
 void acknowledgeParentHandler(int signal);
-
-
+void recievingCompleteHandler(int signal);
 
 /********************************************************** 
 * Entry point for program
-* - could I write size to the pipe?
 *
 **********************************************************/
 
@@ -67,8 +69,8 @@ int main(int argc, char *argv[])
 	fprintf(logger, "-- Binding ^C (SIGINT) signal to handler for all processes\n");
 	
 	int fd[2];
-	int fd2[2];
-	int secondPid;
+	//int fd2[2];
+	
 	int status;
 
     if (pipe (fd) < 0) { 
@@ -77,106 +79,89 @@ int main(int argc, char *argv[])
     }
 
     // Create First Child Process
-    if ((secondPid = fork()) < 0) { 
+    if ((pid = fork()) < 0) { 
         perror ("fork failed"); 
         exit(1); 
     }  
 
     /* Second Process - C1 */
-    if (secondPid == 0){
-    	// Close write from pipe
-    	//int logId = 1;
+    if (pid == 0){
 
+    	// Close write from pipe
     	close(fd[WRITE]);
     	//fclose(stdout);
-    	fclose(stdin);
-    	
+    	//fclose(stdin);
 
-		int thirdPid;
-		int status2;
-		if(pipe(fd2) < 0){
-			perror("Unable to create pipe 2");
-			fprintf(logger, "Failed to create pipe 2\n");
+		FILE* output;
+		if((output = fopen("tmp/output.txt", "w+")) == NULL){
+			perror("Cannot open output");
+			exit(1);
+		}
+		fflush(stdout);
+		fflush(stdin);
+
+		FILE* vectorA;
+		if((vectorA = fopen(argv[1], "r")) == NULL){
+			perror(argv[1]);
 			exit(1);
 		}
 
-		if((thirdPid = fork()) < 0){
-			perror("fork failed");
-			fprintf(logger, "Failed to create second fork");
-			exit(1);
-		}
-
-		/***************************************************
-		* Third Process (C2). Read VectorA and perform 
-		* addition on A + (-B). B is read from pipe
-		***************************************************/
-
-		if(thirdPid == 0){
-			close(fd[READ]);
-			close(fd2[WRITE]);
-			signal(SIGUSR1, acknowledgeParentHandler);
-
-			pauseProcesses();
-
-			FILE* output;
-			FILE* vectorA;
-			int recievedAllBits = 0;
-
-			if((vectorA = fopen(argv[2], "r")) == NULL){
-				perror(argv[2]);
-				exit(1);
-			}
-
-		    output = fopen("tmp/output.txt", "w+");
-
-			int bit = 0;
-			while(recievedAllBits != 1){
-				while(1){
-					if(bit == 2){
-						kill(getppid(),SIGUSR1);
+		int bit = 0;
+		int carry = 0;
+		int isFirstBit = 0;
+    	/* Loop for handling read/write */
+		while(1){
+	    	do{
+	    		read(fd[READ], &bit, sizeof(int));
+	    		printf("Child received %i\n", bit);
+		    	if(bit == 3){
+					fprintf(logger, "-- C1: Recieved end of file. Sending signal to parent\n");
+					fclose(output);
+					kill(getppid(), SIGUSR2);
+		    		exit(0);
+					//wait(&status2);
+		    		// Notify Parent we've gotten all characters
+		    	}
+		    	else if(bit == 2){
+					isFirstBit = 0;
+					carry = 0;
+		    		fprintf(logger, "-- C1: Recieved end of line. Sending signal to parent\n");
+		    		kill(getppid(), SIGUSR1);
+					fprintf(output, "\n");
+		    	}
+		    	else {
+					if(isFirstBit == 1 && carry == 1){
+						if(bit == 1){
+							bit = 0;
+							carry = 1;
+						}
+						if(bit == 0){
+							bit = 1;
+							carry = 0;
+						}
 					}
-			    	read(fd2[READ], &bit, sizeof(int));
-			    	printf("Final child received %i\n", bit);
-			    	fprintf(output, "%i", bit);
+					else if(isFirstBit == 0){
+						if(bit == 1){
+							bit = 0;
+							carry = 1;
+						}
+						else if(bit == 0){
+							bit = 0;
+							carry = 0;
+						}
+					}
+					fprintf(logger, "-- C1: Writing %i to output\n", bit);
+					fprintf(output, "%i", bit);
+					isFirstBit = 1;
 				}
-			}
+		    	// TODO Perform Incriment
 
-
-			fclose(output);
-
+		    	// Write to C2
+		    	//write(fd2[WRITE], &bit, sizeof(int));
+	    	} while(bit != 2);
+		    
 		}
-
-		else {
-			// Let parent know we've gotten end of line with this handler
-			signal(SIGUSR1, acknowledgeParentHandler);
-
-	    	int bit = 0;
-	    	int recievedAllBits = 0;
-    
-
-    		// try to read from pipe
-    		while(recievedAllBits != 1){
-		    	while(bit != 2){
-			    	read(fd[READ], &bit, sizeof(int));
-			    	if(bit == 3){
-			    		recievedAllBits = 1;
-			    		// Notify Parent we've gotten all characters
-			    	}
-			    	if(bit == 2){
-			    		kill(getppid(), SIGUSR1);
-			    	}
-			    	printf("Child received %i\n", bit);
-			    	// TODO Perform Incriment
-
-			    	// Write to C2
-			    	write(fd2[WRITE], &bit, sizeof(int));
-	    		}
-    		}
-
-
-	    	printf("Recieved end of line\n");
-	    	
-		}
+	    exit(0);
     }
 	
 	/*******************************************************
@@ -187,12 +172,14 @@ int main(int argc, char *argv[])
 		//int logId = 0;
 		// Close read from pipe
 		close(fd[READ]);
-		fclose(stdout);
-		fclose(stdin);
-
+		//fclose(stdout);
+		//fclose(stdin);
+		signal(SIGUSR1, acknowledgeParentHandler);
+		signal(SIGUSR2, recievingCompleteHandler);
 		pauseProcesses();
+		signal(SIGINT, killAll);
 
-		fprintf(logger, "-- Reading file dimensions\n");
+		fprintf(logger, "-- Opening VectorB for ereading\n");
 
 		FILE* vectorB;
 
@@ -201,30 +188,39 @@ int main(int argc, char *argv[])
 			perror(argv[2]);
 			exit(1);
 		}
-		// Turn char into int
 		
+		// while((c = fgetc(vectorB)) != EOF){
+		// 	if(bit != 2 || bit != 3){
+		// 		bitA = c - '0';
+		// 		if(bit = 0 )
+		// 	}
+		// }
 
-		// Find file dimensions and send through pipe
-		// char dimensions[1];
-		// dimensions[0] = findBinaryLength(vectorB);
-		// dimensions[1] = findVectorLength(vectorB); 
-		
-		int bit = 0;
-		int c;
-
-		while((c = fgetc(vectorB)) != '\n'){
-			bit = c - '0';
-			if(bit == 0){
-				bit = 1;
-			} else {
-				bit = 0;
-			}
-			write(fd[WRITE], &bit, sizeof(int));
-		}
 		// 2 Might mean end of binary number
 		// 3 might mean EOF
-		if(c == '\n'){
-			bit = 2;
+		int bit = 0;
+		int c;
+		while((c = fgetc(vectorB)) != EOF){
+			if(c == '\n'){
+				nextLine = 1;
+				bit = 2;
+			}
+			else {
+
+				bit = c - '0';
+				if(bit == 0){
+					bit = 1;
+				} else {
+					bit = 0;
+				}
+			}
+			fprintf(logger, "-- P: Sending bit %i to child\n", bit);
+			write(fd[WRITE], &bit, sizeof(int));
+		}
+
+		if(c == EOF){
+			fprintf(logger, "-- P: Reached EOF, sending 3 to child\n");
+			bit = 3;
 			write(fd[WRITE], &bit, sizeof(int));
 		}
 
@@ -236,40 +232,9 @@ int main(int argc, char *argv[])
 
 
 	/* Child 2 - C2 */
-	
+	fprintf(logger, "-- Terminating Program\n");
 	fclose(logger);
 	return 0;
-}
-
-/********************************************************** 
-* Finds the length of each binary number
-**********************************************************/
-int findBinaryLength(FILE* vector)
-{
-	int c;
-	int length = 0;
-	while((c = fgetc(vector)) != '\n'){
-		length++;
-	}
-
-	return length-1;
-}
-
-/********************************************************** 
-* Finds the total number of binary numbers
-**********************************************************/
-int findVectorLength(FILE* vector)
-{
-	int c;
-	int length = 0;
-	while((c = fgetc(vector)) != EOF){
-		if(c == '\n'){
-			length++;
-		}
-	}
-
-	// Plus 1 because there is no new line at EOF
-	return length+1;
 }
 
 void pauseProcesses(){
@@ -309,11 +274,29 @@ void unpauseHandler(int signal)
 
 void acknowledgeParentHandler(int signal)
 {
-	printf("Recieved notification from child\n");
-	// Send this signal to parent to let them know they are done
-
+	if(pid > 0){
+		fprintf(logger, "Child recieved end of a line\n");
+		nextLine = 0;
+	}	
 }
 
+void recievingCompleteHandler(int signal){
+	if(pid > 0){
+		printf("\nChild Finished Recieving");
+		fprintf(logger, "Child finished recieving\n");
+		kill(pid, SIGKILL);
+		exit(0);
+	}
+}
+
+void killAll(int signal)
+{
+	if(pid > 0){
+		fprintf(logger, "Recieved instruction to kill\n");
+		kill(pid, SIGKILL);
+		exit(0);
+	}
+}
 
 
 /********************************************************** 
