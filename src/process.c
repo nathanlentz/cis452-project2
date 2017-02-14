@@ -20,6 +20,7 @@
 
 /* Global Variables */
 typedef enum { false, true } bool;
+struct stat st = {0};
 int isPaused;
 int incrementerId;
 int adderId;
@@ -52,6 +53,12 @@ int main(int argc, char *argv[])
 	}
 
     printf("Spinning things up. . .\n");
+
+    // Check for and create tmp directory for output
+    if(stat("tmp", &st) == -1){
+		mkdir("tmp", 0700);
+	}
+
 
     int numberLen = atoi(argv[3]);
     int numberOfValues = atoi(argv[4]);
@@ -193,6 +200,10 @@ int main(int argc, char *argv[])
                 kill(getppid(), SIGUSR1);
             }
             wait(&adderStatus);
+
+            // Close File Descriptors and exit process
+            close(compToIncPipe[READ]);
+            close(incToAddPipe[WRITE]);
             printf("Incrementer done!\n");
         
             exit(0);
@@ -204,14 +215,36 @@ int main(int argc, char *argv[])
             close(compToIncPipe[READ]);
             close(incToAddPipe[WRITE]);
 
+            FILE* vectorA;
+            FILE* output;
+
+            // Open 2nd input
+            if((vectorA = fopen(argv[2], "r")) == NULL){
+                perror(argv[2]);
+                exit(1);
+            }
+
+            output = fopen("tmp/output.txt", "w+");
+
             char buffer[numberLen+2];
             int counter = 1;
             while(counter <= numberOfValues){
                 read(incToAddPipe[READ], &buffer, sizeof(buffer));
-                printf("Adder read: %s\n", buffer);
+                printf("Adder recieved: %s\n", buffer); 
+
+                printf("Adder writing to output: %s\n", buffer);
+                buffer[numberLen]='\n';
+                fprintf(output, "%s", buffer);
+
+
                 counter++;
                 kill(getppid(), SIGUSR2);
             }
+
+            // Close File Descriptors and exit process
+            close(incToAddPipe[READ]);
+            fclose(vectorA);
+            fclose(output);
             printf("Adder done!\n");
             exit(0);
         }
