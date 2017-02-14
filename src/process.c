@@ -226,18 +226,51 @@ int main(int argc, char *argv[])
 
             output = fopen("tmp/output.txt", "w+");
 
-            char buffer[numberLen+2];
-            int counter = 1;
-            while(counter <= numberOfValues){
-                read(incToAddPipe[READ], &buffer, sizeof(buffer));
-                printf("Adder recieved: %s\n", buffer); 
+            char vectorAbuffer[numberLen+2];
+            char vectorBbuffer[numberLen+2];
+            int i;
+            bool carry;
 
-                printf("Adder writing to output: %s\n", buffer);
-                buffer[numberLen]='\n';
-                fprintf(output, "%s", buffer);
+            while (fgets(vectorAbuffer, sizeof(vectorAbuffer), vectorA) != NULL){
+                char sum[numberLen+2];
+                vectorAbuffer[numberLen]='\0';
+                read(incToAddPipe[READ], &vectorBbuffer, sizeof(vectorBbuffer));
+                printf("Adder recieved: %s\t", vectorBbuffer); 
+                printf("Adder read in: %s\t\t", vectorAbuffer);
 
-
-                counter++;
+                // A + B
+                // Loop through both indexes comparing bits
+                carry = false;
+                for(i = numberLen-1; i >= 0; i--){
+                    if((vectorAbuffer[i] == '0' && vectorBbuffer[i] == '0') && !carry){
+                        sum[i] = '0';
+                    }
+                    else if((vectorAbuffer[i] == '0' && vectorBbuffer[i] == '0') && carry){
+                        sum[i] = '1';
+                        carry = false;
+                    }
+                    else if(((vectorAbuffer[i] == '0' && vectorBbuffer[i] == '1') || 
+                             (vectorAbuffer[i] == '1' && vectorBbuffer[i] == '0')) && !carry){
+                        sum[i] = '1';
+                    }
+                    else if(((vectorAbuffer[i] == '0' && vectorBbuffer[i] == '1') || 
+                             (vectorAbuffer[i] == '1' && vectorBbuffer[i] == '0')) && carry){
+                        sum[i] = '0';
+                        carry = true;
+                    }
+                    else if((vectorAbuffer[i] == '1' && vectorBbuffer[i] == '1') && !carry){
+                        sum[i] = '0';
+                        carry = true;
+                    }
+                    else { // Both are 1s and there is a carry
+                        sum[i] = '1';
+                        carry = true;
+                    }
+                }
+                sum[numberLen]='\n';
+                printf("Adder writing to output: %s\n\n", sum);
+                fprintf(output, "%s", sum);
+                // Notify incrementer I have read from the buffer
                 kill(getppid(), SIGUSR2);
             }
 

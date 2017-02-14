@@ -22,57 +22,52 @@ typedef enum { false, true } bool;
 
 /* Main Entry Point for Program */
 int main(int argc, char *argv[]){
-
-    int numberLen = atoi(argv[3]);
-    FILE* vectorB;
-    if((vectorB = fopen(argv[2], "r")) == NULL){
-        perror(argv[2]);
-            exit(1);
-    }
-
-    char buffer[numberLen+2];
-    int sum; 
     int i;
-    bool isFirst;
     bool carry;
-    
-    while (fgets(buffer, sizeof(buffer), vectorB) != NULL)  {
-        buffer[numberLen]='\0'; // Remove \n from input for now
+    char num1[10];
+    char num2[10];
+    char sum[10];
+    int numberLen = atoi(argv[1]);
 
-        // Report what read was
-        printf("Read: %s\n", buffer);
-        isFirst = true;
-        carry = false;
+    printf("Enter binary num 1: ");
+    fgets(num1, 11, stdin);
+    printf("Enter binary num 2: ");
+    fgets(num2, 11, stdin);
+
+    printf("Adding %s and %s\n", num1, num2);
+    carry = false;
         // Loop through string and perform 'compliment'
-        for(i = numberLen-1; i >=0; i--){
-            if(isFirst){
-                if(buffer[i] == '0'){
-                    buffer[i] = '1';
-                    break;
-                }
-                if(buffer[i] == '1'){
-                    buffer[i] = '0';
-                    carry = true;
-                    continue;
-                }
-            }
-            else {
-                if(buffer[i] == '0' && carry){
-                    buffer[i] = '1';
-                    carry = false;
-                }
-                else if(buffer[i] == '1' && carry){
-                    buffer[i] = '0';
-                    carry = true;
-                }
-                else {
-                    break;
-                }
-            }
+    for(i = numberLen-1; i >= 0; i--){
+        if((num1[i] == '0' && num2[i] == '0') && !carry){
+            printf("hit 1\n");
+            sum[i] = '0';
         }
-        printf("Incremented by 1 is: %s\n", buffer); 
-        
+        else if((num1[i] == '0' && num2[i] == '0') && carry){
+            sum[i] = '1';
+            printf("hit 2\n");
+            carry = false;
+        }
+        else if(((num1[i] == '0' && num2[i] == '1') || (num1[i] == '1' && num2[i] == '0')) && !carry){
+            printf("hit 3\n");
+            sum[i] = '1';
+        }
+        else if(((num1[i] == '0' && num2[i] == '1') || (num1[i] == '1' && num2[i] == '0')) && carry){
+            printf("hit 4\n");
+            sum[i] = '0';
+            carry = true;;
+        }
+        else if((num1[i] == '1' && num2[i] == '1') && !carry){
+            printf("hit 5\n");
+            sum[i] = '0';
+            carry = true;
+        }
+        else { // Both are 1s and there is a carry
+            printf("hit 6\n");
+            sum[i] = '1';
+            carry = true;
+        }
     }
+        printf("Sum is %s", sum);
 
     return 0;
 }
