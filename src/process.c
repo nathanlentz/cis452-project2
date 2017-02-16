@@ -219,8 +219,8 @@ int main(int argc, char *argv[])
             FILE* output;
 
             // Open 2nd input
-            if((vectorA = fopen(argv[2], "r")) == NULL){
-                perror(argv[2]);
+            if((vectorA = fopen(argv[1], "r")) == NULL){
+                perror(argv[1]);
                 exit(1);
             }
 
@@ -230,13 +230,17 @@ int main(int argc, char *argv[])
             char vectorBbuffer[numberLen+2];
             int i;
             bool carry;
+            int counter = 1;
 
             while (fgets(vectorAbuffer, sizeof(vectorAbuffer), vectorA) != NULL){
-                char sum[numberLen+2];
+                
+                //fgets(vectorAbuffer, sizeof(vectorAbuffer), vectorA);
                 vectorAbuffer[numberLen]='\0';
+                char sum[numberLen+2];
                 read(incToAddPipe[READ], &vectorBbuffer, sizeof(vectorBbuffer));
                 printf("Adder recieved: %s\t", vectorBbuffer); 
                 printf("Adder read in: %s\t\t", vectorAbuffer);
+                //fflush(stdout);
 
                 // A + B
                 // Loop through both indexes comparing bits
@@ -267,9 +271,12 @@ int main(int argc, char *argv[])
                         carry = true;
                     }
                 }
+                
                 sum[numberLen]='\n';
-                printf("Adder writing to output: %s\n\n", sum);
+                printf("Adder writing to output: %s\n", sum);
+                
                 fprintf(output, "%s", sum);
+                counter++;
                 // Notify incrementer I have read from the buffer
                 kill(getppid(), SIGUSR2);
             }
